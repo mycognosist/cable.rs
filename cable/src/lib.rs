@@ -90,13 +90,13 @@ impl UserInfo {
 /// Print debug representation of user info.
 impl fmt::Debug for UserInfo {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "key: {:?}, val: {:?}", &self.key, &self.val)
+        write!(f, "\"key\": {:?}, \"val\": {:?}", &self.key, &self.val)
     }
 }
 
 /// Print user info.
 impl fmt::Display for UserInfo {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "key: {}, val: {}", &self.key, &self.val)
+        write!(f, "\"key\": {}, \"val\": {}", &self.key, &self.val)
     }
 }
