@@ -208,7 +208,7 @@ impl fmt::Display for MessageHeader {
 
         write!(
             f,
-            "msg_type: {}, circuit_id: {:?}, req_id: {:?}",
+            "\"msg_type\": {}, \"circuit_id\": {:?}, \"req_id\": {:?}",
             &self.msg_type, circuit_id_hex, req_id_hex
         )
     }
@@ -236,13 +236,13 @@ impl fmt::Display for MessageBody {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             MessageBody::Request { ttl, body } => {
-                write!(f, "ttl: {}, {}", ttl, body)
+                write!(f, "\"ttl\": {}, {}", ttl, body)
             }
             MessageBody::Response { body } => {
                 write!(f, "{}", body)
             }
             MessageBody::Unrecognized { msg_type: _ } => {
-                write!(f, "msg_type: unrecognized")
+                write!(f, "\"msg_type\": \"unrecognized\"")
             }
         }
     }
@@ -335,11 +335,11 @@ impl fmt::Display for RequestBody {
         match self {
             RequestBody::Post { hashes } => {
                 let hashes_hex: Vec<String> = hashes.iter().map(hex::encode).collect();
-                write!(f, "hashes: {:?}", hashes_hex)
+                write!(f, "\"hashes\": {:?}", hashes_hex)
             }
             RequestBody::Cancel { cancel_id } => {
                 let cancel_id_hex = hex::encode(cancel_id);
-                write!(f, "cancel_id: {:?}", cancel_id_hex)
+                write!(f, "\"cancel_id\": {:?}", cancel_id_hex)
             }
             RequestBody::ChannelTimeRange {
                 channel,
@@ -349,15 +349,15 @@ impl fmt::Display for RequestBody {
             } => {
                 write!(
                     f,
-                    "channel: {:?}, time_start: {}, time_end: {}, limit: {}",
+                    "\"channel\": {:?}, \"time_start\": {}, \"time_end\": {}, \"limit\": {}",
                     channel, time_start, time_end, limit
                 )
             }
             RequestBody::ChannelState { channel, future } => {
-                write!(f, "channel: {:?}, future: {}", channel, future)
+                write!(f, "\"channel\": {:?}, \"future\": {}", channel, future)
             }
             RequestBody::ChannelList { skip, limit } => {
-                write!(f, "offset: {}, limit: {}", skip, limit)
+                write!(f, "\"offset\": {}, \"limit\": {}", skip, limit)
             }
         }
     }
@@ -395,14 +395,14 @@ impl fmt::Display for ResponseBody {
         match self {
             ResponseBody::Hash { hashes } => {
                 let hashes_hex: Vec<String> = hashes.iter().map(hex::encode).collect();
-                write!(f, "hashes: {:?}", hashes_hex)
+                write!(f, "\"hashes\": {:?}", hashes_hex)
             }
             ResponseBody::Post { posts } => {
                 let posts_hex: Vec<String> = posts.iter().map(hex::encode).collect();
-                write!(f, "posts: {:?}", posts_hex)
+                write!(f, "\"posts\": {:?}", posts_hex)
             }
             ResponseBody::ChannelList { channels } => {
-                write!(f, "channels: {:?}", channels)
+                write!(f, "\"channels\": {:?}", channels)
             }
         }
     }

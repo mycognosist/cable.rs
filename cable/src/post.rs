@@ -67,7 +67,7 @@ impl fmt::Display for PostHeader {
 
         write!(
             f,
-            "public_key: {:?}, signature: {:?}, links: {:?}, post_type: {}, timestamp: {}",
+            "\"public_key\": {:?}, \"signature\": {:?}, \"links\": {:?}, \"post_type\": {}, \"timestamp\": {}",
             public_key_hex, signature_hex, links_hex, &self.post_type, &self.timestamp
         )
     }
@@ -123,26 +123,26 @@ impl fmt::Display for PostBody {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             PostBody::Text { channel, text } => {
-                write!(f, "channel: {:?}, text: {:?}", channel, text)
+                write!(f, "\"channel\": {:?}, \"text\": {:?}", channel, text)
             }
             PostBody::Delete { hashes } => {
                 let hashes_hex: Vec<String> = hashes.iter().map(hex::encode).collect();
-                write!(f, "hashes: {:?}", hashes_hex)
+                write!(f, "\"hashes\": {:?}", hashes_hex)
             }
             PostBody::Info { info } => {
-                write!(f, "info: {:?}", info)
+                write!(f, "\"info\": {:?}", info)
             }
             PostBody::Topic { channel, topic } => {
-                write!(f, "channel: {:?}, topic: {:?}", channel, topic)
+                write!(f, "\"channel\": {:?}, \"topic\": {:?}", channel, topic)
             }
             PostBody::Join { channel } => {
-                write!(f, "channel: {:?}", channel)
+                write!(f, "\"channel\": {:?}", channel)
             }
             PostBody::Leave { channel } => {
-                write!(f, "channel: {:?}", channel)
+                write!(f, "\"channel\": {:?}", channel)
             }
             PostBody::Unrecognized { post_type: _ } => {
-                write!(f, "post_type: unrecognized")
+                write!(f, "\"post_type\": \"unrecognized\"")
             }
         }
     }
